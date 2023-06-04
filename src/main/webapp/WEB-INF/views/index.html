@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="/layout :: head">
+</head>
+<body>
+<h3>Articles</h3>
+<p>
+    <a th:href="@{/article/create}">
+        Add new article
+    </a>
+</p>
+<div class="notify">
+    <div th:if="${success}">
+        <span th:text="${success}"></span>
+    </div>
+</div>
+<table id = "articles">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Content</th>
+        <th>Created Date</th>
+        <th>Edit</th>
+        <th>Delete</th>
+        <th>View</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="row,rowStat : ${articles}">
+        <td th:text="${row.getTitle()}"></td>
+        <td th:text="${row.getContent()}"></td>
+        <td th:text="${row.getCreated_date()}"></td>
+        <td><a th:href="@{/article/{id}/edit(id=${row.getId()})}">edit</a></td>
+        <td><a th:href="@{/article/{id}/delete(id=${row.getId()})}">delete</a></td>
+        <td><a th:href="@{/article/{id}/view(id=${row.getId()})}">view</a></td>
+    </tr>
+    </tbody>
+</table>
+<footer th:replace="/layout :: footer"></footer>
+</body>
+</html>
